@@ -40,7 +40,7 @@ def dict_to_toml(schedule_dict):
                 safe_value = str(value).replace('"', '\\"')
                 lines.append(f'{key} = "{safe_value}"')
             lines.append("")
-    if lines[-1] == "":
+    if lines and lines[-1] == "":
         lines.pop()
     return "\n".join(lines)
 
@@ -70,6 +70,7 @@ if __name__ == '__main__':
         print(toml_string)
     finally:
         None
+
 
 
 
