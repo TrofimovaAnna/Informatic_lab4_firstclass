@@ -2,7 +2,7 @@ import time
 import tomli_w
 import pickle
  
-start_time = time.time()  # время начала выполнения
+start_time = time.time()  
  
 
 def parse_schedule(filename):
@@ -22,8 +22,7 @@ def parse_schedule(filename):
     return d
 
 
-# ОСНОВНОЙ КОД 
-
+# основной код
 
 counter = 0
 while counter < 100:
@@ -34,19 +33,11 @@ while counter < 100:
             with open("schedule.chl", "r", encoding="utf-8") as f:
                 chl_text = f.read()
                 schedule_dict = parse_schedule("schedule.chl")
-                # print(f'Прочитанный файл (тип данных: {type(schedule_dict)}):\n{schedule_dict}')
 
-            # 2. Сериализуем в байты
             pickled = pickle.dumps(schedule_dict)
-            # print(f'Бинарный код: {pickled}')
-            # print(f"Размер: {len(pickled)} байт")
 
-            # 3. Восстанавливаем
             restored = pickle.loads(pickled)
-            # print(restored)
-            # print(f"Десериализованные данные: {restored}")
 
-            # 4. Конвертация в формат toml с помощью tomli_w
             toml_string = tomli_w.dumps(schedule_dict)
             # print("TOML строка:")
             # print(toml_string)
@@ -54,9 +45,10 @@ while counter < 100:
             None
 
  
-end_time = time.time()  # время окончания выполнения
-execution_time = end_time - start_time  # вычисляем время выполнения
+end_time = time.time() 
+execution_time = end_time - start_time  
  
 print(f"Время выполнения программы: {execution_time} секунд")
+
 
 # Время выполнения программы: 0.06343865394592285 секунд
