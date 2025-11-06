@@ -22,28 +22,29 @@ def parse_schedule(filename):
 
 if __name__ == '__main__':
     try:
-        # 1. Чтение и парсинг chl в словарь
+        # 1.чтение и парсинг HCL в словарь
         with open("schedule.chl", "r", encoding="utf-8") as f:
             chl_text = f.read()
             schedule_dict = parse_schedule("schedule.chl")
             print(f'Прочитанный файл (тип данных: {type(schedule_dict)}):\n{schedule_dict}')
 
-        # 2. Сериализуем в байты
+        # 2.сериализуем в байты
         pickled = pickle.dumps(schedule_dict)
         # print(f'Бинарный код: {pickled}')
         # print(f"Размер: {len(pickled)} байт")
 
-        # 3. Восстанавливаем
+        # 3.восстанавливаем
         restored = pickle.loads(pickled)
         # print(restored)
         # print(f"Десериализованные данные: {restored}")
 
-        # 4. Конвертация в формат toml с помощью tomli_w
+        # 4.конвертация в формат toml с помощью tomli_w
         toml_string = tomli_w.dumps(schedule_dict)
         print("TOML строка:")
         print(toml_string)
     finally:
         None
+
 
 
 
