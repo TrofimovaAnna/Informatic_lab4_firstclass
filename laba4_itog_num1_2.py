@@ -1,4 +1,3 @@
-# Функции для бинарного преобразования строки
 def text_to_bits(text, encoding='utf-8', errors='surrogatepass'):
     bits = bin(int.from_bytes(text.encode(encoding, errors), 'big'))[2:]
     return bits.zfill(8 * ((len(bits) + 7) // 8))
@@ -27,8 +26,6 @@ def parse_schedule(filename):
     return d
 
 
-
-# десериализация dict → .toml строка
 def dict_to_toml(schedule_dict):
     lines = []
     for day_name, lessons in schedule_dict.items():
@@ -49,27 +46,28 @@ def dict_to_toml(schedule_dict):
 
 if __name__ == '__main__':
     try:
-        # 1. Чтение и парсинг .chl → словарь
+        # 1.чтение и парсинг .chl → словарь
         with open("schedule.chl", "r", encoding="utf-8") as f:
             chl_text = f.read()
             schedule_dict = parse_schedule("schedule.chl")
             print(f'Прочитанный файл (тип данных: {type(schedule_dict)}):\n{schedule_dict}')
 
-        # 2. Сериализация (перевод в бинарный код)
+        # 2.сериализация (перевод в бинарный код)
         new_dict = str(schedule_dict)
         binary_bits = text_to_bits(new_dict)
         print(f'Бинарный код:\n{binary_bits}')
 
-        # 3. Десериализация (восстановление бинарного коде в словарь)
+        # 3.десериализация (восстановление бинарного коде в словарь)
         restored_tomb_string = text_from_bits(binary_bits)
         schedule_dict = eval(restored_tomb_string)
         print(f'Десериализованные данные (тип данных: {type(schedule_dict)}):\n{schedule_dict}')
 
-        # 4. Конвертация в формат toml
+        # 4.конвертация в формат toml
         toml_string = dict_to_toml(schedule_dict)
         print(toml_string)
     finally:
         None
+
 
 
 
