@@ -18,34 +18,31 @@ def parse_schedule(filename):
     return d
 
 
-# основной код
+try:
+    # 1. Чтение и парсинг  в словарь
+    with open("schedule.hcl", "r", encoding="utf-8") as f:
+        chl_text = f.read()
+        schedule_dict = parse_schedule("schedule.hcl")
+        print(f'Прочитанный файл (тип данных: {type(schedule_dict)}):\n{schedule_dict}')
 
-if __name__ == '__main__':
-    try:
-        # 1.чтение и парсинг HCL в словарь
-        with open("schedule.chl", "r", encoding="utf-8") as f:
-            chl_text = f.read()
-            schedule_dict = parse_schedule("schedule.chl")
-            print(f'Прочитанный файл (тип данных: {type(schedule_dict)}):\n{schedule_dict}')
+    # 2. Сериализиция в байты
+    pickled = pickle.dumps(schedule_dict)
+    # print(f'Бинарный код: {pickled}')
+    # print(f"Размер: {len(pickled)} байт")
 
-        # 2.сериализуем в байты
-        pickled = pickle.dumps(schedule_dict)
-        # print(f'Бинарный код: {pickled}')
-        # print(f"Размер: {len(pickled)} байт")
+    # 3. Десериализация
+    restored = pickle.loads(pickled)
+    # print(restored)
+    # print(f"Десериализованные данные: {restored}")
 
-        # 3.восстанавливаем
-        restored = pickle.loads(pickled)
-        # print(restored)
-        # print(f"Десериализованные данные: {restored}")
-
-        # 4.конвертация в формат toml с помощью tomli_w
-        toml_string = tomli_w.dumps(schedule_dict)
-        print("TOML строка:")
-        print(toml_string)
-    finally:
-        None
-
-
+    # 4. Конвертация с исп tomli_w
+    toml_string = tomli_w.dumps(schedule_dict)
+    # print("TOML строка:")
+    # print(toml_string)
+    with open("schedule1.toml", "w", encoding="utf-8") as toml_file:
+        toml_file.write(toml_string)
+finally:
+    None
 
 
 

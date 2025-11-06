@@ -47,38 +47,29 @@ def dict_to_xml(data):
 
 
 
-# основной код
+try:
+    with open("schedule.hcl", "r", encoding="utf-8") as f:
+        chl_text = f.read()
+        schedule_dict = parse_schedule("schedule.hcl")
+        print(f'Прочитанный файл (тип данных: {type(schedule_dict)}):\n{schedule_dict}')
 
-if __name__ == '__main__':
-    try:
-        # 1. Чтение и парсинг HCL → словарь
-        with open("schedule.chl", "r", encoding="utf-8") as f:
-            chl_text = f.read()
-            schedule_dict = parse_schedule("schedule.chl")
-            print(f'Прочитанный файл (тип данных: {type(schedule_dict)}):\n{schedule_dict}')
+    new_dict = str(schedule_dict)
+    binary_bits = text_to_bits(new_dict)
+    print(f'Бинарный код:\n{binary_bits}')
 
-        # 2. Сериализация (перевод в бинарный код)
-        new_dict = str(schedule_dict)
-        binary_bits = text_to_bits(new_dict)
-        print(f'Бинарный код:\n{binary_bits}')
+    restored_tomb_string = text_from_bits(binary_bits)
+    schedule_dict = eval(restored_tomb_string)
+    print(f'Десериализованные данные (тип данных: {type(schedule_dict)}):\n{schedule_dict}')
 
-        # 3. Десериализация (восстановление бинарного коде в словарь)
-        restored_tomb_string = text_from_bits(binary_bits)
-        schedule_dict = eval(restored_tomb_string)
-        print(f'Десериализованные данные (тип данных: {type(schedule_dict)}):\n{schedule_dict}')
+    # xml_string = dict_to_xml(schedule_dict)
+    # print('Формат xml')
+    # print(xml_string)
 
-        # 4. Конвертация в формат XML и запись в файл
-        xml_content = dict_to_xml(schedule_dict)
+    xml_content = dict_to_xml(schedule_dict)
+
+    with open("schedule.xml", "w", encoding="utf-8") as xml_file:
+        xml_file.write(xml_content)
         
-        # Записываем XML в файл вместо вывода на экран
-        with open("schedule.xml", "w", encoding="utf-8") as xml_file:
-            xml_file.write(xml_content)
-        
-        print('XML файл создан: schedule.xml')
-    finally:
-        None
-
-
-
-
-
+    print('XML файл: schedule.xml')
+finally:
+    None

@@ -1,6 +1,6 @@
 import time
  
-start_time = time.time()
+start_time = time.time() 
  
 def text_to_bits(text, encoding='utf-8', errors='surrogatepass'):
     bits = bin(int.from_bytes(text.encode(encoding, errors), 'big'))[2:]
@@ -30,8 +30,6 @@ def parse_schedule(filename):
     return d
 
 
-
-# десериализация dict - toml строка
 def dict_to_toml(schedule_dict):
     lines = []
     for day_name, lessons in schedule_dict.items():
@@ -48,31 +46,28 @@ def dict_to_toml(schedule_dict):
     return "\n".join(lines)
 
 
-# основной код
+# Основной код
 
 counter = 0
 while counter < 100:
     counter += 1
-    if __name__ == '__main__':
-        try:
-            with open("schedule.chl", "r", encoding="utf-8") as f:
-                chl_text = f.read()
-                schedule_dict = parse_schedule("schedule.chl")
+    try:
+        with open("schedule.hcl", "r", encoding="utf-8") as f:
+            hcl_text = f.read()
+            schedule_dict = parse_schedule("schedule.hcl")
             
-            new_dict = str(schedule_dict)
-            binary_bits = text_to_bits(new_dict)
+        new_dict = str(schedule_dict)
+        binary_bits = text_to_bits(new_dict)
             
-            restored_tomb_string = text_from_bits(binary_bits)
-            schedule_dict = eval(restored_tomb_string)
+        restored_tomb_string = text_from_bits(binary_bits)
+        schedule_dict = eval(restored_tomb_string)
             
-            toml_string = dict_to_toml(schedule_dict)
-        finally:
-            None
+        toml_string = dict_to_toml(schedule_dict)
+    finally:
+        None
  
-end_time = time.time() 
+end_time = time.time()  
 execution_time = end_time - start_time  
  
 print(f"Время выполнения программы: {execution_time} секунд")
-
 # Время выполнения программы: 0.09927725791931152 секунд
-
