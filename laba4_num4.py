@@ -1,4 +1,4 @@
-# --- Функции для бинарного преобразования строки ---
+# Функции для бинарного преобразования строки
 def text_to_bits(text, encoding='utf-8', errors='surrogatepass'):
     bits = bin(int.from_bytes(text.encode(encoding, errors), 'big'))[2:]
     return bits.zfill(8 * ((len(bits) + 7) // 8))
@@ -48,7 +48,7 @@ def dict_to_xml(data):
 
 
 
-# === ОСНОВНОЙ КОД ===
+# основной код
 
 if __name__ == '__main__':
     try:
@@ -68,11 +68,6 @@ if __name__ == '__main__':
         schedule_dict = eval(restored_tomb_string)
         print(f'Десериализованные данные (тип данных: {type(schedule_dict)}):\n{schedule_dict}')
 
-        # 4. Конвертация в формат xml и print
-        # xml_string = dict_to_xml(schedule_dict)
-        # print('Формат xml')
-        # print(xml_string)
-
         # 4. Конвертация в формат XML и запись в файл
         xml_content = dict_to_xml(schedule_dict)
         
@@ -83,6 +78,7 @@ if __name__ == '__main__':
         print('XML файл успешно создан: schedule.xml')
     finally:
         None
+
 
 
 
