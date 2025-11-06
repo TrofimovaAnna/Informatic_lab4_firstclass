@@ -31,7 +31,7 @@ def parse_schedule(filename):
 
 
 
-# --- десериализация dict → .toml строка ---
+# десериализация dict - toml строка
 def dict_to_toml(schedule_dict):
     lines = []
     for day_name, lessons in schedule_dict.items():
@@ -48,7 +48,7 @@ def dict_to_toml(schedule_dict):
     return "\n".join(lines)
 
 
-# === ОСНОВНОЙ КОД ===
+# основной код
 
 counter = 0
 while counter < 100:
@@ -77,4 +77,5 @@ end_time = time.time()  # время окончания выполнения
 execution_time = end_time - start_time  # вычисляем время выполнения
  
 print(f"Время выполнения программы: {execution_time} секунд")
+
 # Время выполнения программы: 0.09927725791931152 секунд
