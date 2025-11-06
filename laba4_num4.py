@@ -1,4 +1,3 @@
-# Функции для бинарного преобразования строки
 def text_to_bits(text, encoding='utf-8', errors='surrogatepass'):
     bits = bin(int.from_bytes(text.encode(encoding, errors), 'big'))[2:]
     return bits.zfill(8 * ((len(bits) + 7) // 8))
@@ -52,7 +51,7 @@ def dict_to_xml(data):
 
 if __name__ == '__main__':
     try:
-        # 1. Чтение и парсинг .chl → словарь
+        # 1. Чтение и парсинг HCL → словарь
         with open("schedule.chl", "r", encoding="utf-8") as f:
             chl_text = f.read()
             schedule_dict = parse_schedule("schedule.chl")
@@ -75,9 +74,10 @@ if __name__ == '__main__':
         with open("schedule.xml", "w", encoding="utf-8") as xml_file:
             xml_file.write(xml_content)
         
-        print('XML файл успешно создан: schedule.xml')
+        print('XML файл создан: schedule.xml')
     finally:
         None
+
 
 
 
