@@ -18,7 +18,7 @@ def parse_schedule(filename):
     return d
 
 
-# ОСНОВНОЙ КОД 
+# основной код
 
 if __name__ == '__main__':
     try:
@@ -44,6 +44,7 @@ if __name__ == '__main__':
         print(toml_string)
     finally:
         None
+
 
 
 
