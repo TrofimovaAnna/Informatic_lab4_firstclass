@@ -1,4 +1,4 @@
-# --- Функции для бинарного преобразования строки ---
+# Функции для бинарного преобразования строки
 def text_to_bits(text, encoding='utf-8', errors='surrogatepass'):
     bits = bin(int.from_bytes(text.encode(encoding, errors), 'big'))[2:]
     return bits.zfill(8 * ((len(bits) + 7) // 8))
@@ -28,7 +28,7 @@ def parse_schedule(filename):
 
 
 
-# --- десериализация dict → .toml строка ---
+# десериализация dict → .toml строка
 def dict_to_toml(schedule_dict):
     lines = []
     for day_name, lessons in schedule_dict.items():
@@ -45,7 +45,7 @@ def dict_to_toml(schedule_dict):
     return "\n".join(lines)
 
 
-# === ОСНОВНОЙ КОД ===
+# основной код
 
 if __name__ == '__main__':
     try:
@@ -70,6 +70,7 @@ if __name__ == '__main__':
         print(toml_string)
     finally:
         None
+
 
 
 
