@@ -1,6 +1,6 @@
 import time
  
-start_time = time.time()  # время начала выполнения
+start_time = time.time()
  
 # --- Функции для бинарного преобразования строки ---
 def text_to_bits(text, encoding='utf-8', errors='surrogatepass'):
@@ -50,40 +50,31 @@ def dict_to_xml(data):
     xml.append('</schedule>')
     return '\n'.join(xml)
 
-
-
-# === ОСНОВНОЙ КОД ===
 counter = 0
 while counter < 100:
     counter += 1
     if __name__ == '__main__':
         try:
-            # 1. Чтение и парсинг .chl → словарь
             with open("schedule.chl", "r", encoding="utf-8") as f:
                 chl_text = f.read()
                 schedule_dict = parse_schedule("schedule.chl")
-                # print(f'Прочитанный файл (тип данных: {type(schedule_dict)}):\n{schedule_dict}')
-
-            # 2. Сериализация (перевод в бинарный код)
+                
             new_dict = str(schedule_dict)
             binary_bits = text_to_bits(new_dict)
-            # print(f'Бинарный код:\n{binary_bits}')
-
-            # 3. Десериализация (восстановление бинарного коде в словарь)
+            
             restored_tomb_string = text_from_bits(binary_bits)
             schedule_dict = eval(restored_tomb_string)
-            # print(f'Десериализованные данные (тип данных: {type(schedule_dict)}):\n{schedule_dict}')
-
-            # 4. Конвертация в формат xml
+            
             toml_string = dict_to_xml(schedule_dict)
             # print('Формат xml')
             # print(toml_string)
         finally:
             None
  
-end_time = time.time()  # время окончания выполнения
-execution_time = end_time - start_time  # вычисляем время выполнения
+end_time = time.time() 
+execution_time = end_time - start_time 
  
 print(f"Время выполнения программы: {execution_time} секунд")
+
 
 # Время выполнения программы: 0.07166457176208496 секунд
